@@ -22,11 +22,13 @@ class Caracol {
             if(dia == 50) {
                 estaVivo = false;
                 System.out.println("El caracol murio");
+                continue;
             }
 
             if(profundidadCaracol < 0) {
                 estaAdentro = false;
                 System.out.println("El caracol salio!");
+                continue;
             }
 
             subidaMaxima = dia == 10 ? subidaMaxima = 3 : subidaMaxima;
