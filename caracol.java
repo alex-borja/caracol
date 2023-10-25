@@ -9,16 +9,20 @@ class Caracol {
         int bajadaMaxima = 2;
         boolean estaAdentro = true;
         boolean estaVivo = true;
+        int profundidadLluvia = 0;
+        int profundidadPozo = 20;
 
         final String BORDE = "[__]";
         final String INICIO_POZO = "[__]              [__]";
         final String INICIO_POZO_CARRO = "[__]    O-=-O     [__]";
         final String METRO_CON_AGUA = "[]~~~~~~~~~~~~~~[]";
         final String METRO = "[]:. :. :. :. :.[]";
-        final String CARACOL = "[]    _@)_/’    []";
+        final String CARACOL = "[]    _@)_/     []";
 
         while(estaAdentro && estaVivo) {
             dia++;
+            System.out.println("Dia " + dia);
+            System.out.println("El caracol esta a [" + profundidadCaracol + "]");
             if(dia == 50) {
                 estaVivo = false;
                 System.out.println("El caracol murio");
@@ -31,18 +35,29 @@ class Caracol {
                 continue;
             }
 
-            subidaMaxima = dia == 10 ? subidaMaxima = 3 : subidaMaxima;
-            subidaMaxima = dia == 20 ? subidaMaxima = 2 : subidaMaxima;
-
-            boolean hayCarro = false;
+            subidaMaxima = dia >= 10 ? subidaMaxima = 3 : subidaMaxima;
+            subidaMaxima = dia >= 20 ? subidaMaxima = 2 : subidaMaxima;
 
             double subidaDelDia = (Math.random() * (subidaMaxima - 1)) + 1;
             System.out.println("El caracol subio " + subidaDelDia);
             profundidadCaracol -= subidaDelDia;
 
             double bajadaDelDia = (Math.random() * (bajadaMaxima - 0)) + 0;
+
+            double hayCarro = Math.random();
+            if (hayCarro == 0.35) {
+                System.out.println("Paso un carro");
+                profundidadCaracol = profundidadCaracol + 2;
+            }
+
+            double lluvia = Math.random();
+            if (lluvia == 0.05) {
+                profundidadPozo -= 5;    
+            } else if (lluvia == 0.10) {
+                
+            }
+
             System.out.println("El caracol bajo " + bajadaDelDia);
-            bajadaDelDia = hayCarro ? bajadaDelDia + 2 : bajadaDelDia;
             profundidadCaracol += bajadaDelDia;
 
             System.out.println("El caracol esta en " + profundidadCaracol);
